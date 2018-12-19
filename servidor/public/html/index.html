@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
+	 crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Lobster+Two|Roboto" rel="stylesheet">
+	<link rel="stylesheet" href="../css/styles.css">
+
+	<title>Usuarios</title>
+</head>
+
+<body>
+	<div class="bodyDiv">
+		<div id="usersTab">
+			<h1>Usuarios</h1>
+			<div class="usersBox">
+				<div id="newUserBox">
+					<button id="newUserButton"><a href="users/new"> <i class="fas fa-plus-square"></i> Nuevo Usuario </a></button>
+					<input type="text" placeholder="filtrar contenido" id="searchBar">
+					<i class="fas fa-filter"></i>
+				</div>
+
+				<table id="table">
+					<tr>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Teléfono</th>
+						<th>Email</th>
+						<th colspan="2">Modificaciones</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="../js/index.js"></script>
+	</div>
+</body>
+
+</html>

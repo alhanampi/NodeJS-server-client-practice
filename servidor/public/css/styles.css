@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  text-decoration: none;
+  background-image: url("../img/background.jpg");
+}
+
+a {
+  text-decoration: none;
+  color: #222020;
+}
+
+.bodyDiv {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 10px 10px 20px #928f8f;
+  margin: auto;
+  margin-top: 30px;
+}
+.bodyDiv h1 {
+  font-family: "Lobster Two", cursive;
+  font-size: 40px;
+  color: #2e292d;
+  text-align: center;
+}
+
+.usersBox button {
+  margin-bottom: 10px;
+  margin-right: 30px;
+}
+
+table th {
+  font-family: Lato-Bold;
+  font-size: 18px;
+  color: #fff;
+  background-color: #9aa9bb;
+}
+table td {
+  padding: 10px;
+  margin: 15px;
+  font-family: roboto;
+  font-size: 15px;
+  color: #4d4d4d;
+  line-height: 1.4;
+}
+table td:hover {
+  background-color: #dce0e4;
+}
+
+button {
+  background-color: #c6e1f0;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  color: #202020;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  padding: 3px 18px;
+  text-decoration: none;
+  text-align: center;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #62b2c0;
+}
+
+#formBox form {
+  display: flex;
+  flex-direction: column;
+}
+#formBox form input {
+  width: 80%;
+  margin-bottom: 5px;
+  padding: 3px 3px;
+}
+#formBox form button {
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+/*# sourceMappingURL=styles.css.map */
