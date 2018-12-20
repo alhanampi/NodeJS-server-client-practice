@@ -25,12 +25,11 @@ function validate(newUser) {
   if (!validateMail.test(newUser.email)) {
     return false;
   }
-  if(newUser.email.length === 0) {
+  if (newUser.email.length === 0) {
     return false; //no necesito poner el else
   }
   return true;
 }
-
 
 //RUTAS anda
 //PING PONG
@@ -55,6 +54,21 @@ router.get('/users/edit', function (req, res) {
 router.get('/api/users', function (req, res) {
   dataFil = readFS();
   res.json(dataFil)
+
+  // a partir de aca contenido nuevo, SEARCH
+  let search = req.query.search;
+
+  //con el u accede a los datos de users. toLowerCase para que no distinga mayus/minus en la busqueda
+  if (search && search.length > 0) {
+    users = users.filter(function (i) {
+      return i.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
+        i.surname.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
+        i.phone.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
+        i.email.toLowerCase().indexOf(search.toLowerCase()) >= 0  //cada una de esas comparaciones devuelve true o false
+    })
+  }
+  res.json(users)
+  
 })
 
 //leer web
@@ -69,7 +83,7 @@ router.get('/api/users/:id', function (req, res) {
 });
 
 ////////////////////////
-//POST hecho ANDA (ahora ya no anda, con la validacion)
+//POST hecho ANDA
 router.post('/api/users', function (req, res) {
   const user = req.body
   dataFil = readFS();
@@ -141,10 +155,6 @@ router.delete('/api/users/:id', function (req, res) {
   return res.send('todo ok')
 })
 
-//SEARCH en proceso:
-/*
-router.get('/api/users', function (req, res) {
-  const search = req.query.search
-})
-*/
+
+
 module.exports = router;
