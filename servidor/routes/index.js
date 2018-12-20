@@ -53,21 +53,20 @@ router.get('/users/edit', function (req, res) {
 //GET hecho ANDA
 router.get('/api/users', function (req, res) {
   dataFil = readFS();
-  res.json(dataFil)
 
   // a partir de aca contenido nuevo, SEARCH
   let search = req.query.search;
 
   //con el u accede a los datos de users. toLowerCase para que no distinga mayus/minus en la busqueda
   if (search && search.length > 0) {
-    users = users.filter(function (i) {
+    dataFil = dataFil.filter(function (i) {
       return i.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
         i.surname.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
         i.phone.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
         i.email.toLowerCase().indexOf(search.toLowerCase()) >= 0  //cada una de esas comparaciones devuelve true o false
     })
   }
-  res.json(users)
+  res.json(dataFil)
   
 })
 
