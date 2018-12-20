@@ -1,11 +1,8 @@
-//editar usuario
+//edit user
 
-//query params de la url
 const webParam = new URLSearchParams (window.location.search);
 //leer param que se pasa
 const userEdit = webParam.get('id')
-
-//llamar por ajax
 
 $.ajax('http://localhost:3000/api/users/' + userEdit)
 .done(function(data) {
@@ -25,8 +22,17 @@ $('#put').on('click', function () {
 			email: $('#email').val(),
 		},
 		success: function () {
-			alert('usuario editado'); //cambiar por un modal 
-			location.href = '/users'; //ver si esta es la direccion correcta
-		  }
-	})
+			Swal({
+				position: 'top-end',
+				type: 'success',
+				title: 'Usuario editado',
+				showConfirmButton: false,
+				timer: 1500
+			})
+					setTimeout( function() {
+					location.href = '/users'; 
+
+				}, 1500)
+			}
+		})
   })

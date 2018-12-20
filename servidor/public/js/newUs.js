@@ -17,12 +17,25 @@ $('#postUs').on('click', function () {
 			method: 'POST',
 			data: newUser,
 			success: function () {
-				//aca mostrar modal?
-				location.href = '/users'
+				Swal({
+					position: 'top-end',
+					type: 'success',
+					title: 'Usuario ingresado correctamente',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout( function() {
+					location.href = '/users'; 
+
+				}, 1500)
 			}
 		}
 		)
 	} else {
-		alert('inserte un valor correcto')
+		Swal({ //sweet alert
+			type: 'error',
+			title: 'Oops...',
+			text: 'Revise los datos!'
+		})
 	}
 })

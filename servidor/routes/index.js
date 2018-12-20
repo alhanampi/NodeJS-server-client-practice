@@ -63,11 +63,10 @@ router.get('/api/users', function (req, res) {
       return i.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
         i.surname.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
         i.phone.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
-        i.email.toLowerCase().indexOf(search.toLowerCase()) >= 0  //cada una de esas comparaciones devuelve true o false
+        i.email.toLowerCase().indexOf(search.toLowerCase()) >= 0
     })
   }
   res.json(dataFil)
-  
 })
 
 //leer web
@@ -153,7 +152,5 @@ router.delete('/api/users/:id', function (req, res) {
   writeFS(dataFil);
   return res.send('todo ok')
 })
-
-
 
 module.exports = router;

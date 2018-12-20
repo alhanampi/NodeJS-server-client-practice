@@ -1,7 +1,7 @@
 //GET USERS
 
 $.ajax('http://localhost:3000/api/users')
-	.done(function (data) { //data es lo que contesta el server
+	.done(function (data) { 
 		for (let i = 0; i < data.length; i++) {
 			$('#table').append(`
 				<tr id="user-${data[i].id}" class="tableTr">
@@ -22,8 +22,17 @@ function eraseB(id) {
 		method: 'DELETE',
 		success: function () {
 			$('#user' + id).remove();
-			alert('usuario eliminado')
-			location.href = '/users';
+			Swal({
+				position: 'top-end',
+				type: 'success',
+				title: 'Usuario eliminado',
+				showConfirmButton: false,
+				timer: 1500
+			})
+			setTimeout( function() {
+				location.href = '/users'; 
+
+			}, 1500)
 		}
 	})
 }
@@ -33,8 +42,8 @@ function eraseB(id) {
 $('.filterBut').click(function () {
 	const search = $('#searchBar').val()
 
-	$('#table .tableTr').remove() //remover tabla
-
+	$('#table .tableTr').remove() 
+	
 	$.ajax('http://localhost:3000/api/users?search=' + search)
 		.done(function (data) {
 			//tengo que apendear de nuevo la lista una vez que se eliminó
