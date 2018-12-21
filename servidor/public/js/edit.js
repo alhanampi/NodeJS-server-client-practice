@@ -1,7 +1,6 @@
 //edit user
 
 const webParam = new URLSearchParams (window.location.search);
-//leer param que se pasa
 const userEdit = webParam.get('id')
 
 $.ajax('http://localhost:3000/api/users/' + userEdit)

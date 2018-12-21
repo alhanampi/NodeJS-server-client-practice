@@ -9,7 +9,6 @@ a {
 	text-decoration: none;
 	color: rgb(34, 32, 32);
 }
-//mixin
 
 //styles
 .bodyDiv {
@@ -29,13 +28,11 @@ a {
 	}
 }
 
-
-	#newUserButton, .filterBut {
-		margin-bottom: 10px;
-		margin-right: 30px;
-		box-shadow: 3px 3px 3px rgb(226, 216, 216)
+#newUserButton, .filterBut {
+	margin-bottom: 10px;
+	margin-right: 30px;
+	box-shadow: 3px 3px 3px rgb(226, 216, 216)
 	}
-
 
 table {
 	th {
@@ -95,4 +92,3 @@ button:hover {
 		}
 	}
 }
-

@@ -26,12 +26,12 @@ function validate(newUser) {
     return false;
   }
   if (newUser.email.length === 0) {
-    return false; //no necesito poner el else
+    return false;
   }
   return true;
 }
 
-//RUTAS anda
+//RUTAS 
 //PING PONG
 router.get('/ping', function (req, res) {
   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'pong.html'))
@@ -50,7 +50,7 @@ router.get('/users/edit', function (req, res) {
 })
 /////////////////////////
 
-//GET hecho ANDA
+//GET  
 router.get('/api/users', function (req, res) {
   dataFil = readFS();
 
@@ -81,7 +81,7 @@ router.get('/api/users/:id', function (req, res) {
 });
 
 ////////////////////////
-//POST hecho ANDA
+//POST
 router.post('/api/users', function (req, res) {
   const user = req.body
   dataFil = readFS();
@@ -95,7 +95,7 @@ router.post('/api/users', function (req, res) {
     phone: user.phone,
     id: newId
   }
-  //llamado a funcion (que no anda, tira un error 500)
+  //llamado a funcion
   if (validate(newUser) === true) {
     //res.status(200);
     dataFil.push(newUser)
@@ -107,7 +107,7 @@ router.post('/api/users', function (req, res) {
 })
 
 /////////////////////////////
-//PUT hecho
+//PUT 
 router.put('/api/users/:id', function (req, res) {
   dataFil = readFS();
 
@@ -137,7 +137,7 @@ router.put('/api/users/:id', function (req, res) {
 })
 
 /////////////////////////
-//DELETE hecho ANDA
+//DELETE
 router.delete('/api/users/:id', function (req, res) {
   const parameters = req.params.id
   let dataFil = fs.readFileSync(dbRoute)
