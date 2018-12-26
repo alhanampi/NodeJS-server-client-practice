@@ -23,7 +23,6 @@ function eraseB(id) {
 		success: function () {
 			$('#user' + id).remove();
 			Swal({
-				position: 'top-end',
 				type: 'success',
 				title: 'Usuario eliminado',
 				showConfirmButton: false,

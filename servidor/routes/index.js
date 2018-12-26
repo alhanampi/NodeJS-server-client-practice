@@ -20,13 +20,17 @@ function writeFS(dataFil) {
   fs.writeFileSync(dbRoute, JSON.stringify(dataFil));
 }
 
-//validar email:
+//validar:
 function validate(newUser) {
   if (!validateMail.test(newUser.email)) {
     return false;
   }
-  if (newUser.email.length === 0) {
-    return false;
+  if (newUser.name.length === 0 || newUser.surname.length === 0 || newUser.phone.length === 0 || newUser.email.length === 0) {
+ //   console.log('valor 0')
+    return false; 
+  } 
+  if (newUser.name.length >= 30 || newUser.surname.length >= 30 || newUser.phone.length >= 30 || newUser.email.length  >= 30) {
+    return false; 
   }
   return true;
 }
@@ -54,10 +58,9 @@ router.get('/users/edit', function (req, res) {
 router.get('/api/users', function (req, res) {
   dataFil = readFS();
 
-  // a partir de aca contenido nuevo, SEARCH
+  //SEARCH
   let search = req.query.search;
 
-  //con el u accede a los datos de users. toLowerCase para que no distinga mayus/minus en la busqueda
   if (search && search.length > 0) {
     dataFil = dataFil.filter(function (i) {
       return i.name.toLowerCase().indexOf(search.toLowerCase()) >= 0 ||
@@ -97,7 +100,6 @@ router.post('/api/users', function (req, res) {
   }
   //llamado a funcion
   if (validate(newUser) === true) {
-    //res.status(200);
     dataFil.push(newUser)
     writeFS(dataFil);
     res.json(dataFil);

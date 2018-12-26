@@ -11,13 +11,26 @@ $('#postUs').on('click', function () {
 		email: email
 	}
 
-if (name != '' && surname != '' && phone != '' && email !== '') {
+function validate (newUser) {
+	const checkMail = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~\.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/
+	
+	const checkNum = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/
+
+	if (!checkMail.test(newUser.email)) {
+		return false
+	}
+	if (!checkNum.test(newUser.phone)) {
+		return false
+	}
+	return true
+  }
+
+if (name != '' && surname != '' && phone != '' && email !== '' && validate(newUser) != false) {
 	$.ajax('http://localhost:3000/api/users', {
 		method: 'POST',
 		data: newUser,
 		success: function () {
 			Swal({
-				position: 'top-end',
 				type: 'success',
 				title: 'Usuario ingresado correctamente',
 				showConfirmButton: false,
@@ -30,7 +43,7 @@ if (name != '' && surname != '' && phone != '' && email !== '') {
 		}
 	)
 } else {
-	Swal({ //sweet alert
+	Swal({ 
 		type: 'error',
 		title: 'Oops...',
 		text: 'Revise los datos!'
