@@ -16,13 +16,10 @@ function validate (newUser) {
 	
 	const checkNum = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/
 
-	if (!checkMail.test(newUser.email)) {
+	if (!checkMail.test(newUser.email) || !checkNum.test(newUser.phone)) {
 		return false
 	}
-	if (!checkNum.test(newUser.phone)) {
-		return false
-	}
-	return true
+		return true
   }
 
 if (name != '' && surname != '' && phone != '' && email !== '' && validate(newUser) != false) {
