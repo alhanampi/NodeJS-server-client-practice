@@ -26,7 +26,7 @@ $('#put').on('click', function () {
 		phone: phone,
 		email: email
 	}
-
+//validation function
 	function validate(data) {
 		const checkMail = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~\.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/
 
@@ -38,7 +38,7 @@ $('#put').on('click', function () {
 		}
 		return true
 	}
-
+//data validation
 	if (name != '' && surname != '' && phone != '' && email !== '' && validate(data) != false) {
 
 		$.ajax('http://localhost:3000/api/users/' + userEdit, {

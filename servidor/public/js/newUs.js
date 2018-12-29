@@ -22,6 +22,7 @@ function validate (newUser) {
 		return true
   }
 
+	//data validation
 if (name != '' && surname != '' && phone != '' && email !== '' && validate(newUser) != false) {
 	$.ajax('http://localhost:3000/api/users', {
 		method: 'POST',

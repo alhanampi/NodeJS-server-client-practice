@@ -23,18 +23,57 @@ function eraseB(id) {
 		success: function () {
 			$('#user' + id).remove();
 			Swal({
-				type: 'success',
-				title: 'Usuario eliminado',
-				showConfirmButton: false,
-				timer: 1500
-			})
-			setTimeout( function() {
-				location.href = '/users'; 
+				title: '¿Quiere eliminar este usuario?',
+				text: "Esta acción no puede deshacerse",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Sí'
+			}).then((result) => {
+				if (result.value) {
+					Swal({
+						showConfirmButton: false,
+						type: 'success',
+						title: 'Usuario eliminado',
+					}
+						)
+						setTimeout( function() {
+							location.href = '/users';
+						}, 1500)
+					}}
+							) }}
+	)}
+		//	Swal({
+			// 	type: 'success',
+			// 	title: 'Usuario eliminado',
+			// 	showConfirmButton: false,
+			// 	timer: 1500
+			// })
+			// setTimeout( function() {
+			// 	location.href = '/users'; 
 
-			}, 1500)
-		}
-	})
-}
+			// }, 1500)
+// 		}
+// 	})
+// }
+
+// Swal({
+//   title: '¿Quiere eliminar este usuario?',
+//   text: "Esta acción no puede deshacerse",
+//   type: 'warning',
+//   showCancelButton: true,
+//   confirmButtonColor: '#3085d6',
+//   cancelButtonColor: '#d33',
+//   confirmButtonText: 'Sí'
+// }).then((result) => {
+//   if (result.value) {
+//     Swal(
+//       'Usuario eliminado',
+//       'success'
+//     )
+//   }
+// })
 
 //SEARCH 
 
