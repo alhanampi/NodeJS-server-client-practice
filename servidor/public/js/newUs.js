@@ -1,3 +1,4 @@
+//ADD USER
 $('#postUs').on('click', function () {
 	const name = $('#name').val()
 	const surname = $('#surname').val()
@@ -11,40 +12,41 @@ $('#postUs').on('click', function () {
 		email: email
 	}
 
-function validate (newUser) {
-	const checkMail = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~\.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/
-	
-	const checkNum = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/
+	//USER VALIDATION FUNCTION
+	function validate(newUser) {
+		const checkMail = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~\.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/
 
-	if (!checkMail.test(newUser.email) || !checkNum.test(newUser.phone)) {
-		return false
-	}
+		const checkNum = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/
+
+		if (!checkMail.test(newUser.email) || !checkNum.test(newUser.phone)) {
+			return false
+		}
 		return true
-  }
+	}
 
-	//data validation
-if (name != '' && surname != '' && phone != '' && email !== '' && validate(newUser) != false) {
-	$.ajax('http://localhost:3000/api/users', {
-		method: 'POST',
-		data: newUser,
-		success: function () {
-			Swal({
-				type: 'success',
-				title: 'Usuario ingresado correctamente',
-				showConfirmButton: false,
-				timer: 1500
-			})
-			setTimeout(function () {
-				location.href = '/users';
-			}, 1500)
+	//USER VALIDATION
+	if (name != '' && surname != '' && phone != '' && email !== '' && validate(newUser) != false) {
+		$.ajax('http://localhost:3000/api/users', {
+			method: 'POST',
+			data: newUser,
+			success: function () {
+				Swal({ //sweet alert for the modals
+					type: 'success',
+					title: 'Usuario ingresado correctamente',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(function () {
+					location.href = '/users';
+				}, 1500)
+			}
 		}
-		}
-	)
-} else {
-	Swal({ 
-		type: 'error',
-		title: 'Oops...',
-		text: 'Revise los datos!'
+		)
+	} else {
+		Swal({
+			type: 'error',
+			title: 'Oops...',
+			text: 'Revise los datos!'
 		})
 	}
 })

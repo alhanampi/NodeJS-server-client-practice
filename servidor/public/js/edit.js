@@ -1,9 +1,6 @@
-//edit user
-
+//EDIT USER
 const webParam = new URLSearchParams(window.location.search);
 const userEdit = webParam.get('id')
-
-
 
 $.ajax('http://localhost:3000/api/users/' + userEdit)
 	.done(function (data) {
@@ -12,8 +9,6 @@ $.ajax('http://localhost:3000/api/users/' + userEdit)
 		$('#phone').val(data.phone);
 		$('#email').val(data.email);
 	})
-
-
 
 $('#put').on('click', function () {
 	const name = $('#name').val()
@@ -26,7 +21,8 @@ $('#put').on('click', function () {
 		phone: phone,
 		email: email
 	}
-//validation function
+
+	//USER VALIDATION FUNCTION
 	function validate(data) {
 		const checkMail = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~\.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/
 
@@ -38,13 +34,12 @@ $('#put').on('click', function () {
 		}
 		return true
 	}
-//data validation
-	if (name != '' && surname != '' && phone != '' && email !== '' && validate(data) != false) {
 
+	//USER VALIDATION
+	if (name != '' && surname != '' && phone != '' && email !== '' && validate(data) != false) {
 		$.ajax('http://localhost:3000/api/users/' + userEdit, {
 			method: 'PUT',
 			data: data,
-
 			success: function () {
 				console.log('usuario modificado')
 				Swal({

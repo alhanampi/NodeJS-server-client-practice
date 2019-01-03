@@ -1,7 +1,6 @@
 //GET USERS
-
 $.ajax('http://localhost:3000/api/users')
-	.done(function (data) { 
+	.done(function (data) {
 		for (let i = 0; i < data.length; i++) {
 			$('#table').append(`
 				<tr id="user-${data[i].id}" class="tableTr">
@@ -22,7 +21,8 @@ function eraseB(id) {
 		method: 'DELETE',
 		success: function () {
 			$('#user' + id).remove();
-			Swal({
+			//sweet alert for the modals:
+			Swal({ 
 				title: '¿Quiere eliminar este usuario?',
 				text: "Esta acción no puede deshacerse",
 				type: 'warning',
@@ -37,54 +37,27 @@ function eraseB(id) {
 						type: 'success',
 						title: 'Usuario eliminado',
 					}
-						)
-						setTimeout( function() {
-							location.href = '/users';
-						}, 1500)
-					}}
-							) }}
-	)}
-		//	Swal({
-			// 	type: 'success',
-			// 	title: 'Usuario eliminado',
-			// 	showConfirmButton: false,
-			// 	timer: 1500
-			// })
-			// setTimeout( function() {
-			// 	location.href = '/users'; 
-
-			// }, 1500)
-// 		}
-// 	})
-// }
-
-// Swal({
-//   title: '¿Quiere eliminar este usuario?',
-//   text: "Esta acción no puede deshacerse",
-//   type: 'warning',
-//   showCancelButton: true,
-//   confirmButtonColor: '#3085d6',
-//   cancelButtonColor: '#d33',
-//   confirmButtonText: 'Sí'
-// }).then((result) => {
-//   if (result.value) {
-//     Swal(
-//       'Usuario eliminado',
-//       'success'
-//     )
-//   }
-// })
+					)
+					setTimeout(function () {
+						location.href = '/users';
+					}, 1500)
+				}
+			}
+			)
+		}
+	}
+	)
+}
 
 //SEARCH 
-
-$('.filterBut').click(function () {
+$('.filterBut').click(function searchButton () {
 	const search = $('#searchBar').val()
 
-	$('#table .tableTr').remove() 
-	
+	$('#table .tableTr').remove()
+
 	$.ajax('http://localhost:3000/api/users?search=' + search)
 		.done(function (data) {
-			//tengo que apendear de nuevo la lista una vez que se eliminó
+			//erase list and populate it again
 			for (var i = 0; i < data.length; i++) {
 				$('#table').append(`
 					<tr id="user-${data[i].id}" class="tableTr">
@@ -97,5 +70,10 @@ $('.filterBut').click(function () {
 					</tr>`)
 			}
 		}
-	)
-})
+		)
+	})
+	
+	//SEARCH WITH ENTER
+  $('#searchBar').keydown(function(e){
+		if(e.which == 13){
+				$('.filterBut').click()}})

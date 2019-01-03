@@ -3,58 +3,64 @@ var path = require('path')
 var fs = require('fs')
 var router = express.Router();
 
+//SERVER SIDE
+
+//DATABASE FILE:
 const dbRoute = 'routes/db.json'
 
-//validar email regex:
-const validateMail = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~\.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/
-
-//leer .json
+//READ DATABASE .JSON
 function readFS() {
   let dataFil = fs.readFileSync(dbRoute);
   dataFil = JSON.parse(dataFil);
   return dataFil;
 }
 
-//escribir .json
+//WRITE DATABASE JSON
 function writeFS(dataFil) {
   fs.writeFileSync(dbRoute, JSON.stringify(dataFil));
 }
 
-//validar:
+//USER VALIDATION FUNCTION
 function validate(newUser) {
+
+  const validateMail = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~\.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/
+
   if (!validateMail.test(newUser.email)) {
     return false;
   }
   if (newUser.name.length === 0 || newUser.surname.length === 0 || newUser.phone.length === 0 || newUser.email.length === 0) {
- //   console.log('valor 0')
-    return false; 
-  } 
-  if (newUser.name.length >= 30 || newUser.surname.length >= 30 || newUser.phone.length >= 30 || newUser.email.length  >= 30) {
-    return false; 
+    return false;
+  }
+  if (newUser.name.length >= 30 || newUser.surname.length >= 30 || newUser.phone.length >= 30 || newUser.email.length >= 30) {
+    return false;
   }
   return true;
 }
 
-//RUTAS 
+//ROUTES
+
 //PING PONG
 router.get('/ping', function (req, res) {
   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'pong.html'))
 });
+
 //INDEX
 router.get('/users', function (req, res) {
   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'index.html'))
 });
+
 //NEW USER
 router.get('/users/new', function (req, res) {
   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'newUser.html'))
 });
+
 //EDIT USER
 router.get('/users/edit', function (req, res) {
   res.sendFile(path.join(__dirname, '..', 'public', 'html', 'editUser.html'))
 })
 /////////////////////////
 
-//GET  
+//GET USER
 router.get('/api/users', function (req, res) {
   dataFil = readFS();
 
@@ -72,7 +78,7 @@ router.get('/api/users', function (req, res) {
   res.json(dataFil)
 })
 
-//leer web
+//READ WEB
 router.get('/api/users/:id', function (req, res) {
   const parameters = req.params.id
   dataFil = readFS();
@@ -84,7 +90,7 @@ router.get('/api/users/:id', function (req, res) {
 });
 
 ////////////////////////
-//POST
+//POST USER
 router.post('/api/users', function (req, res) {
   const user = req.body
   dataFil = readFS();
@@ -98,7 +104,8 @@ router.post('/api/users', function (req, res) {
     phone: user.phone,
     id: newId
   }
-  //llamado a funcion
+
+  //VALIDATION
   if (validate(newUser) === true) {
     dataFil.push(newUser)
     writeFS(dataFil);
@@ -109,7 +116,8 @@ router.post('/api/users', function (req, res) {
 })
 
 /////////////////////////////
-//PUT 
+
+//MODIFY USER
 router.put('/api/users/:id', function (req, res) {
   dataFil = readFS();
 
@@ -139,7 +147,7 @@ router.put('/api/users/:id', function (req, res) {
 })
 
 /////////////////////////
-//DELETE
+//DELETE USER
 router.delete('/api/users/:id', function (req, res) {
   const parameters = req.params.id
   let dataFil = fs.readFileSync(dbRoute)
